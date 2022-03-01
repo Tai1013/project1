@@ -1,0 +1,43 @@
+$themes: (
+    light: (
+        font_color: #3d4145,
+        back_color: #ffffff,
+        main_color: #1c97ce,
+
+        model_mask: #3d4145,
+
+        header_top_color: #ffffff,
+        header_top_background: #3d4145,
+        header_menu_background: #ffffff,
+
+        btn_main1: #01a69c,
+        btn_main2: #1c97ce,
+
+
+    ),
+    dark: (
+        font_color: #ffffff,
+        back_color: #212121,
+        main_color: #1c97ce,
+
+        model_mask: #3d4145,
+
+        header_top_color: #ffffff,
+        header_top_background: #585858,
+        header_menu_background: #585858,
+    )
+);
+
+$theme-map: null;
+@mixin themeify {
+    @each $theme-name, $map in $themes {
+        $theme-map: $map !global;
+        [data-theme="#{$theme-name}"] & {
+            @content;
+        }
+    }
+}
+
+@function theme($key) {
+    @return map-get($theme-map, $key);
+}
